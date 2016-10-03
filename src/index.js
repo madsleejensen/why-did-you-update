@@ -17,18 +17,22 @@ function diffState (prev, next , displayName) {
 
 function createComponentDidUpdate (opts) {
   return function componentDidUpdate (prevProps, prevState) {
-    const displayName = getDisplayName(this)
-
-    if (!shouldInclude(displayName, opts)) {
-      return
-    }
-
-    const diffs =
-      diffProps(prevProps, this.props, displayName)
-        .concat(diffState(prevState, this.state, displayName))
-
-    diffs.forEach(opts.notifier)
+    return handleComponentDidUpdate(prevProps, this.props, prevState, this.state, opts);
   }
+}
+
+export function handleComponentDidUpdate(prevProps, props, prevState, state, opts) {
+  const displayName = getDisplayName(this)
+
+  if (!shouldInclude(displayName, opts)) {
+    return
+  }
+
+  const diffs =
+    diffProps(prevProps, props, displayName)
+      .concat(diffState(prevState, state, displayName))
+
+  diffs.forEach(opts.notifier)
 }
 
 export const whyDidYouUpdate = (React, opts = {}) => {

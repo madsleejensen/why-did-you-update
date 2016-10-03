@@ -3,11 +3,6 @@
   "version": "0.0.8",
   "description": "Patch React to discover unnecessary re-renders",
   "main": "lib/index.js",
-  "files": [
-    "es6",
-    "lib",
-    "umd"
-  ],
   "scripts": {
     "build": "nwb build",
     "clean": "nwb clean",
